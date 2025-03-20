@@ -9,7 +9,14 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+    if created == False:
+        ans = Profile.no_profile(instance)
+        if ans == 'True':
+            Profile.objects.create(user=instance)
+        else:
+            pass
 
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+
+#@receiver(post_save, sender=User)
+#def save_profile(sender, instance, **kwargs):
+#    instance.profile.save()
